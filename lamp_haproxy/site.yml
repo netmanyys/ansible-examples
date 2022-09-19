@@ -6,7 +6,7 @@
 
   roles:
   - common
-
+  
 # Configure and deploy database servers.
 - hosts: dbservers
 
