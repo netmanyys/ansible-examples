@@ -25,7 +25,6 @@
    - nagios-plugins-procs
    - nagios-plugins-load
    - nagios-plugins-disk
-  update_cache: yes
 
 - name: Install ntp
   yum: name=ntp state=present
