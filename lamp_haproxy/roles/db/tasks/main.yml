@@ -1,16 +1,14 @@
 ---
 # This role will install MySQL and create db user and give permissions.
-- name: Down mysql-server, mariadb
-  ansible.builtin.get_url:
-    url: http://repo.mysql.com/mysql-community-release-el7-5.noarch.rpm
-    dest: /tmp/ 
+- name: Install MySQL 5.7 repo
+  yum: name=http://dev.mysql.com/get/mysql57-community-release-el7-8.noarch.rpm state=present
 
-- name: Install Mysql package
-  yum: name={{ item }} state=present
+- name: Install MySQL 5.7
+  yum: pkg={{ item }}
   with_items:
-   #- mysql-server
-   - /tmp/mysql-community-release-el7-5.noarch.rpm
-   - MySQL-python
+  - mysql-community-server
+  - mysql-community-client
+  - MySQL-python
 
 - name: Configure SELinux to start mysql on any port
   seboolean: name=mysql_connect_any state=true persistent=yes
