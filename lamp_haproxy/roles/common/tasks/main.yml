@@ -13,6 +13,9 @@
 - name: Create the GPG key for EPEL
   copy: src=RPM-GPG-KEY-EPEL-6 dest=/etc/pki/rpm-gpg
 
+- name: Clean up the yum cache
+  command: /bin/yum clean all
+
 - name: install some useful nagios plugins
   yum: name={{ item }} state=present
   with_items:
@@ -22,6 +25,7 @@
    - nagios-plugins-procs
    - nagios-plugins-load
    - nagios-plugins-disk
+  update_cache: yes
 
 - name: Install ntp
   yum: name=ntp state=present
